@@ -1,0 +1,1006 @@
+{
+  "meta": {
+    "title": "Juan Andrés Bernuy · Business Systems Analyst",
+    "description": "Soy Juan Andrés, Business Systems Analyst en Madrid. Trabajo entre operaciones, sistemas y datos: ERPs, Azure y Power BI.",
+    "ogTitle": "Juan Andrés Bernuy · Operaciones, sistemas y datos",
+    "ogDescription": "Convierto datos operativos desordenados en sistemas e informes fiables. Madrid."
+  },
+  "nav": {
+    "about": "Sobre mí",
+    "experience": "Experiencia",
+    "pipeline": "Arquitectura",
+    "skills": "Habilidades",
+    "projects": "Proyectos",
+    "education": "Educación",
+    "contact": "Contacto",
+    "chat": "Pregunta sobre mi perfil",
+    "cv": "Descargar CV",
+    "langToggle": "EN",
+    "systemStatus": "Business Systems Analyst",
+    "latency": "Madrid, España"
+  },
+  "hero": {
+    "greeting": "Madrid, España",
+    "name": "Juan Andrés Bernuy",
+    "role": "Business Systems Analyst",
+    "subRole": "Datos y automatización",
+    "tagline": "Convierto datos operativos desordenados en sistemas e informes fiables.",
+    "ctaProjects": "Ver proyectos",
+    "ctaChat": "Pregunta sobre mi perfil",
+    "ctaCv": "Descargar CV",
+    "status": "Abierto a hablar de datos, sistemas y supply chain",
+    "videoTitle": "Mi presentación",
+    "videoSub": "10 segundos",
+    "videoFallbackMsg": "No se ha podido cargar el vídeo",
+    "videoFallbackHint": "La historia sigue igualmente a la izquierda.",
+    "videoUnmute": "Activar sonido",
+    "videoMute": "Silenciar"
+  },
+  "about": {
+    "title": "Sobre mí",
+    "subtitle": "Quién soy",
+    "bioParagraphs": [
+      "Trabajo entre operaciones, sistemas y datos, que es justo donde empiezan la mayoría de los problemas. En Bullboat, una empresa británica que ayuda a marcas de consumo a vender en los grandes retailers de Europa, mi trabajo es que el negocio funcione con información fiable.",
+      "Me encargué de migrar los datos de Sage a Cin7, conecté nuestros sistemas con los almacenes de Países Bajos y Reino Unido y cambié el reporting manual por flujos automáticos y dashboards en Power BI. Ahora estoy llevando la empresa a Microsoft Azure y montando la plataforma de datos que alimenta los informes.",
+      "En el día a día eso es seguir el dato desde el origen hasta el informe: comprobar los registros después de una migración, cuadrar los informes con el sistema del que salen y arreglar los problemas donde empiezan, no donde se notan."
+    ],
+    "stats": [
+      {
+        "id": "stat_exp",
+        "value": "3",
+        "numericValue": 3,
+        "isTodo": false,
+        "label": "Años trabajando",
+        "suffix": "+",
+        "notes": "Desde marzo de 2023"
+      },
+      {
+        "id": "stat_wh",
+        "value": "2",
+        "numericValue": 2,
+        "isTodo": false,
+        "label": "Países con almacén integrado",
+        "suffix": "",
+        "notes": "Países Bajos y Reino Unido"
+      },
+      {
+        "id": "stat_mh",
+        "value": "2",
+        "numericValue": 2,
+        "isTodo": false,
+        "label": "Matrículas de Honor",
+        "suffix": "",
+        "notes": "En ESIC"
+      },
+      {
+        "id": "stat_courses",
+        "value": "9",
+        "numericValue": 9,
+        "isTodo": false,
+        "label": "Cursos y certificaciones",
+        "suffix": "",
+        "notes": "Microsoft, Salesforce, agentes de IA…"
+      }
+    ],
+    "traits": [
+      {
+        "title": "ERP y APIs",
+        "desc": "Cin7 Core, SAP y Sage conectados con Azure SQL y Power BI."
+      },
+      {
+        "title": "Datos en los que fiarse",
+        "desc": "Validar, cuadrar y corregir en origen antes de que el error llegue al informe."
+      },
+      {
+        "title": "IA que sirve para algo",
+        "desc": "Conectar modelos como Claude o Gemini a datos reales del negocio, con acceso controlado."
+      }
+    ]
+  },
+  "pipeline": {
+    "badge": "Cómo trabajo",
+    "title": "Así monto un pipeline de datos",
+    "subtitle": "Caso real: de la API de Cin7 a Power BI",
+    "description": "Es el sistema que he construido en Bullboat. Un único pipeline genérico en Azure Data Factory trae cada entidad de Cin7, la guarda en Azure SQL y deja las tablas listas para Power BI.",
+    "nodes": [
+      {
+        "id": "node_api",
+        "label": "API de Cin7 Core",
+        "category": "Origen",
+        "tech": "API REST · paginación",
+        "status": "Origen",
+        "description": "De aquí salen productos, clientes, proveedores y ventas. Solo traigo lo que ha cambiado desde la última carga.",
+        "specs": [
+          "Carga incremental por fecha de modificación",
+          "Paginación por bloques",
+          "Una configuración por entidad"
+        ]
+      },
+      {
+        "id": "node_adf",
+        "label": "Azure Data Factory",
+        "category": "Orquestación",
+        "tech": "Orquestador + pipeline genérico",
+        "status": "Automático",
+        "description": "Un orquestador lee una tabla de configuración y lanza el mismo pipeline para cada entidad. Añadir una entidad nueva es añadir una fila, no un pipeline nuevo.",
+        "specs": [
+          "Tabla de configuración por entidad",
+          "Marca de agua para no recargarlo todo",
+          "Páginas en paralelo"
+        ]
+      },
+      {
+        "id": "node_sql",
+        "label": "Azure SQL",
+        "category": "Almacenamiento",
+        "tech": "Landing · staging · core",
+        "status": "Consolidado",
+        "description": "Cada entidad pasa por tres capas: el JSON tal cual llega, una tabla limpia y la tabla final, que se actualiza con MERGE.",
+        "specs": [
+          "JSON original guardado",
+          "Actualización con MERGE",
+          "Un procedimiento por entidad"
+        ]
+      },
+      {
+        "id": "node_bi",
+        "label": "Power BI y automatizaciones",
+        "category": "Uso",
+        "tech": "Modelo en estrella · DAX · Power Automate",
+        "status": "En uso",
+        "description": "Las tablas finales alimentan un modelo en estrella en Power BI y los informes de stock que se envían a clientes, retailers y marketplaces.",
+        "specs": [
+          "Modelo en estrella de ventas",
+          "KPIs de stock y pedidos",
+          "Informes de stock por email y SFTP"
+        ]
+      }
+    ],
+    "interactiveHint": "Pasa por cada fase para ver qué hace."
+  },
+  "experience": {
+    "badge": "Trayectoria",
+    "title": "Experiencia",
+    "subtitle": "Trayectoria",
+    "toggleHint": "Pulsa una barra o usa las teclas ← → para recorrer el timeline.",
+    "roles": [
+      {
+        "id": "bullboat",
+        "company": "Bullboat",
+        "role": "Business Systems Analyst",
+        "period": "Mayo 2026 - Actualidad",
+        "status": "Puesto actual",
+        "location": "Madrid, España",
+        "summary": "Responsable de la transición a Microsoft Azure y de la plataforma de datos que alimenta el reporting de la empresa, conectando Cin7 Core, almacenes, retailers y marketplaces.",
+        "highlights": [
+          "Diseño de un data warehouse en Azure SQL con pipelines genéricos e incrementales de Data Factory que cargan varios endpoints de la API de Cin7 en tablas listas para Power BI.",
+          "Desarrollo de un servidor MCP de solo lectura en Python (FastMCP) que expone la API de Cin7 Core a Claude, dando al equipo acceso asistido por IA a pedidos, stock, compras y clientes mediante una única conexión gobernada.",
+          "Responsable de la migración de datos de Sage a Cin7 Core de principio a fin: extracción, transformación a las plantillas de Cin7 y verificación de la exactitud e integridad de los datos.",
+          "Reporting automatizado de stock para clientes de NL y UK, enviado por email (Power Automate, Office Scripts) y por SFTP/FTPS a retailers y marketplaces, gobernado por una tabla de control en Azure SQL.",
+          "Modelos semánticos de Power BI (DAX) para KPIs, stock y flujo de pedidos, y coordinación de la gestión de pedidos dropship con los almacenes, traduciendo necesidades operativas en requisitos de sistema."
+        ],
+        "tags": [
+          "Cin7 Core",
+          "Azure Data Factory",
+          "Azure SQL",
+          "Power BI",
+          "DAX",
+          "Power Query",
+          "Power Automate",
+          "Office Scripts",
+          "Python",
+          "REST APIs",
+          "Sage"
+        ],
+        "start": "2026-05",
+        "end": ""
+      },
+      {
+        "id": "bullboat-intern",
+        "company": "Bullboat",
+        "role": "Logistics & Operations Intern",
+        "period": "Nov 2025 - Mayo 2026",
+        "status": "Puesto anterior",
+        "location": "Madrid, España",
+        "summary": "Visión completa de las operaciones logísticas en los almacenes de Reino Unido y Países Bajos, asumiendo progresivamente la calidad de datos, el reporting y la automatización.",
+        "highlights": [
+          "Seguimiento de pedidos internacionales y control de stock en los centros de NL y UK, siguiendo cada pedido desde el almacén hasta la entrega al cliente.",
+          "Administración de bases de datos logísticas, garantizando integridad, trazabilidad y coherencia.",
+          "Scripts de automatización y herramientas de reporting que redujeron el trabajo manual y sentaron las bases de la mejora de procesos posterior.",
+          "Participación en el diseño de modelos de datos para Business Intelligence operativo, mejorando la visibilidad de atención al cliente."
+        ],
+        "tags": [
+          "Power BI",
+          "Power Automate",
+          "Office Scripts",
+          "Power Query",
+          "REST APIs",
+          "Excel",
+          "SharePoint"
+        ],
+        "start": "2025-11",
+        "end": "2026-05"
+      },
+      {
+        "id": "zamora",
+        "company": "Zamora Company",
+        "role": "Global Supply Chain Intern",
+        "period": "Nov 2024 - Jul 2025",
+        "status": "Puesto anterior",
+        "location": "Madrid, España",
+        "summary": "Apoyo a las operaciones de supply chain global con análisis de datos de pedidos nacionales, internacionales y de e-commerce.",
+        "highlights": [
+          "Análisis de datos de pedidos nacionales, internacionales y e-commerce para mejorar la eficiencia en la gestión de pedidos y el cumplimiento de KPIs.",
+          "Gestión y seguimiento de pedidos internacionales, incluido el control de stock por línea de producto.",
+          "Informes operativos semanales, incluido el reporte Intrastat del comercio intracomunitario."
+        ],
+        "tags": [
+          "SAP",
+          "Google Workspace",
+          "Intrastat"
+        ],
+        "start": "2024-11",
+        "end": "2025-07"
+      },
+      {
+        "id": "byntel",
+        "company": "Multiservicios Byntel",
+        "role": "Técnico en Redes de Telecomunicaciones",
+        "period": "Mar 2023 - Nov 2024",
+        "status": "Puesto anterior",
+        "location": "Madrid, España",
+        "summary": "Técnico de instalación y mantenimiento de infraestructuras de telecomunicaciones, trabajando con contratas como Ezentis, Atelco y Vimantik.",
+        "highlights": [
+          "Instalación y mantenimiento de redes FTTH y RJ45 en edificios residenciales e instalaciones públicas.",
+          "Responsabilidades adicionales en transporte, logística y prevención de riesgos laborales."
+        ],
+        "tags": [
+          "FTTH",
+          "RJ45",
+          "Operaciones de campo"
+        ],
+        "start": "2023-03",
+        "end": "2024-11"
+      }
+    ],
+    "timeline": {
+      "present": "Actualidad",
+      "today": "Hoy",
+      "prev": "Puesto anterior",
+      "next": "Puesto siguiente",
+      "hint": "Pulsa una barra o usa las teclas ← → para recorrer el timeline.",
+      "responsibilities": "Responsabilidades principales",
+      "months": "meses",
+      "filterAll": "Todo",
+      "filterWork": "Trabajo",
+      "filterEducation": "Estudios",
+      "askRole": "Pregúntale a la IA por este puesto",
+      "askEdu": "Pregúntale a la IA por esto",
+      "askRoleQ": "¿Qué hizo Juan como {role} en {company}?",
+      "askEduQ": "Cuéntame sobre {role} de Juan en {company}.",
+      "skillFilter": "Resaltando puestos que usan",
+      "clearSkill": "Quitar",
+      "copyLink": "Copiar enlace",
+      "linkCopied": "Enlace copiado",
+      "planned": "Previsto"
+    },
+    "educationItems": [
+      {
+        "id": "ade",
+        "role": "Administración y Dirección de Empresas (ADE)",
+        "company": "ESIC University",
+        "period": "2022 – 2026",
+        "start": "2022-09",
+        "end": "2026-07",
+        "location": "Madrid, España",
+        "summary": "Grado en ADE cursado en paralelo con Data Science.",
+        "highlights": [
+          "Matrícula de Honor en el TFG sobre Data Driven Management en las pymes españolas",
+          "Delegado de clase, Hackathon, Business Game y Liga de Bolsa Universitaria"
+        ],
+        "tags": [
+          "Excel",
+          "Estrategia SEO",
+          "Salesforce"
+        ]
+      },
+      {
+        "id": "datascience",
+        "role": "Título Superior en Data Science",
+        "company": "ESIC University",
+        "period": "2022 – 2027",
+        "start": "2022-09",
+        "end": "2027-07",
+        "location": "Madrid, España",
+        "summary": "Programa de Data Science cursado en paralelo con el grado en ADE.",
+        "highlights": [
+          "Matrícula de Honor en Programación en Python para Data Science"
+        ],
+        "tags": [
+          "Python",
+          "Modelos predictivos",
+          "Power BI"
+        ]
+      },
+      {
+        "id": "santander",
+        "role": "Santander X Explorer",
+        "company": "Santander X",
+        "period": "Ene 2024 – Jun 2024",
+        "start": "2024-01",
+        "end": "2024-06",
+        "location": "España",
+        "summary": "Programa sobre prácticas de comportamiento empresarial y emprendimiento.",
+        "highlights": [],
+        "tags": [
+          "Emprendimiento"
+        ]
+      },
+      {
+        "id": "erasmus",
+        "role": "Erasmus · Negocios internacionales",
+        "company": "Estonian Business School",
+        "period": "Ago 2025 – Ene 2026",
+        "start": "2025-08",
+        "end": "2026-01",
+        "location": "Tallin, Estonia",
+        "summary": "Semestre de intercambio centrado en negocios internacionales.",
+        "highlights": [],
+        "tags": [
+          "Negocios internacionales"
+        ]
+      }
+    ]
+  },
+  "skills": {
+    "badge": "Habilidades",
+    "title": "Con qué trabajo",
+    "subtitle": "Herramientas y forma de trabajar",
+    "filterHint": "Selecciona una categoría o pasa el cursor sobre una habilidad para ver proyectos relacionados",
+    "categories": [
+      {
+        "id": "hard_cloud",
+        "name": "Cloud e Ingeniería de Datos",
+        "skills": [
+          {
+            "name": "Azure Data Factory",
+            "level": "Avanzado",
+            "category": "hard",
+            "projects": [
+              "cin7-azure-pipeline",
+              "bullboat-ops"
+            ]
+          },
+          {
+            "name": "Azure SQL",
+            "level": "Avanzado",
+            "category": "hard",
+            "projects": [
+              "cin7-azure-pipeline",
+              "fraud-detection"
+            ]
+          },
+          {
+            "name": "APIs REST",
+            "level": "Avanzado",
+            "category": "hard",
+            "projects": [
+              "mcp-api-server",
+              "cin7-azure-pipeline"
+            ]
+          },
+          {
+            "name": "Python",
+            "level": "Avanzado",
+            "category": "hard",
+            "projects": [
+              "mcp-api-server",
+              "fraud-detection",
+              "cuadra-saas"
+            ]
+          },
+          {
+            "name": "Streamlit",
+            "level": "Intermedio",
+            "category": "hard",
+            "projects": [
+              "fraud-detection"
+            ]
+          },
+          {
+            "name": "Machine Learning (ML)",
+            "level": "Intermedio",
+            "category": "hard",
+            "projects": [
+              "fraud-detection",
+              "cuadra-saas"
+            ]
+          },
+          {
+            "name": "MCP (FastMCP)",
+            "level": "Avanzado",
+            "category": "hard",
+            "projects": [
+              "mcp-api-server",
+              "cuadra-saas"
+            ]
+          },
+          {
+            "name": "Git, GitHub y Gitflow",
+            "level": "Intermediate",
+            "category": "hard",
+            "projects": []
+          },
+          {
+            "name": "Bash / Shell",
+            "level": "Intermediate",
+            "category": "hard",
+            "projects": []
+          },
+          {
+            "name": "Azure CLI y Bicep",
+            "level": "Intermediate",
+            "category": "hard",
+            "projects": []
+          }
+        ]
+      },
+      {
+        "id": "hard_erp",
+        "name": "ERP, Marketplaces y BI",
+        "skills": [
+          {
+            "name": "Cin7 Core",
+            "level": "Experto",
+            "category": "hard",
+            "projects": [
+              "cin7-azure-pipeline"
+            ]
+          },
+          {
+            "name": "Power BI",
+            "level": "Avanzado",
+            "category": "hard",
+            "projects": [
+              "cin7-azure-pipeline",
+              "bullboat-ops"
+            ]
+          },
+          {
+            "name": "Power Query M",
+            "level": "Avanzado",
+            "category": "hard",
+            "projects": [
+              "cin7-azure-pipeline"
+            ]
+          },
+          {
+            "name": "Power Automate",
+            "level": "Avanzado",
+            "category": "hard",
+            "projects": [
+              "bullboat-ops"
+            ]
+          },
+          {
+            "name": "Office Scripts",
+            "level": "Avanzado",
+            "category": "hard",
+            "projects": [
+              "bullboat-ops"
+            ]
+          },
+          {
+            "name": "SAP",
+            "level": "Intermedio",
+            "category": "hard",
+            "projects": [
+              "zamora-ops"
+            ]
+          },
+          {
+            "name": "Mirakl",
+            "level": "Intermedio",
+            "category": "hard",
+            "projects": [
+              "bullboat-ops"
+            ]
+          },
+          {
+            "name": "Sage",
+            "level": "Intermediate",
+            "category": "hard",
+            "projects": []
+          },
+          {
+            "name": "DAX",
+            "level": "Intermediate",
+            "category": "hard",
+            "projects": []
+          }
+        ]
+      },
+      {
+        "id": "soft_skills",
+        "name": "Metodología y Ejecución",
+        "skills": [
+          {
+            "name": "Pensamiento Analítico",
+            "level": "Clave",
+            "category": "soft",
+            "projects": [
+              "fraud-detection",
+              "cin7-azure-pipeline"
+            ]
+          },
+          {
+            "name": "Resolución de Problemas",
+            "level": "Clave",
+            "category": "soft",
+            "projects": [
+              "mcp-api-server",
+              "cin7-azure-pipeline"
+            ]
+          },
+          {
+            "name": "Autonomía en Ejecución",
+            "level": "Clave",
+            "category": "soft",
+            "projects": [
+              "cuadra-saas",
+              "mcp-api-server"
+            ]
+          },
+          {
+            "name": "Trabajo en Equipo",
+            "level": "Clave",
+            "category": "soft",
+            "projects": [
+              "bullboat-ops",
+              "zamora-ops"
+            ]
+          },
+          {
+            "name": "Comunicación Técnica",
+            "level": "Clave",
+            "category": "soft",
+            "projects": [
+              "mcp-api-server",
+              "cuadra-saas"
+            ]
+          },
+          {
+            "name": "Aprendizaje Continuo",
+            "level": "Clave",
+            "category": "soft",
+            "projects": [
+              "fraud-detection",
+              "mcp-api-server"
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "projects": {
+    "badge": "Proyectos",
+    "title": "Proyectos",
+    "subtitle": "Cosas que he construido",
+    "modalClose": "Cerrar detalle de proyecto",
+    "items": [
+      {
+        "id": "mcp-api-server",
+        "title": "Servidor MCP para Cin7",
+        "subtitle": "Claude consultando el ERP, en solo lectura",
+        "description": "Un servidor MCP en Python que deja a Claude consultar la API de Cin7 Core: pedidos, stock, compras y clientes, todo desde una única conexión controlada.",
+        "badge": "IA aplicada",
+        "tech": [
+          "Python",
+          "FastMCP",
+          "Docker",
+          "API REST"
+        ],
+        "metrics": "Una conexión, solo lectura",
+        "caseStudy": "En el día a día el equipo pregunta cosas como cuánto stock queda o en qué estado está un pedido. Con este servidor, Claude puede responder consultando Cin7 directamente, sin dar acceso de escritura y sin exportar nada a mano.",
+        "highlights": [
+          "Herramientas para pedidos, stock, compras y clientes",
+          "Acceso de solo lectura por diseño",
+          "Empaquetado con Docker para desplegarlo fácil"
+        ],
+        "repoUrl": "https://github.com/JuanABernuy/mcp-api-server",
+        "demoUrl": "TODO",
+        "isTodo": true
+      },
+      {
+        "id": "fraud-detection",
+        "title": "Detección de fraude con tarjetas",
+        "subtitle": "Proyecto de machine learning en curso",
+        "description": "Trabajo con el dataset Credit Card Fraud de Kaggle, dividido en tres partes: análisis exploratorio, preprocesamiento y modelado.",
+        "badge": "Machine Learning",
+        "tech": [
+          "Python",
+          "Pandas",
+          "Scikit-learn",
+          "Jupyter"
+        ],
+        "metrics": "En curso",
+        "caseStudy": "El fraude es una parte muy pequeña de las transacciones y la mayoría de variables vienen de un PCA, así que el reto está en entender bien los datos antes de modelar. El primer modelo entrena con todas las variables y a partir de ahí lo voy mejorando.",
+        "highlights": [
+          "Duplicados eliminados antes de separar train y test",
+          "Asimetría y curtosis de Time y Amount",
+          "Información mutua para captar relaciones no lineales"
+        ],
+        "repoUrl": "TODO",
+        "demoUrl": "TODO",
+        "isTodo": true
+      },
+      {
+        "id": "cuadra-saas",
+        "title": "Cuadra",
+        "subtitle": "SaaS de facturación y contabilidad",
+        "description": "Mi proyecto propio: una herramienta de facturación y contabilidad para autónomos, gestorías y pymes, con un asistente de IA y Cuadri como mascota.",
+        "badge": "Producto propio",
+        "tech": [
+          "SaaS",
+          "Asistente IA",
+          "Web"
+        ],
+        "metrics": "En desarrollo",
+        "caseStudy": "La idea es que llevar las facturas y la contabilidad sea sencillo para quien no es contable, con un asistente que te ayuda en el proceso.",
+        "highlights": [
+          "Pensado para autónomos, gestorías y pymes",
+          "Asistente de IA integrado",
+          "Web y vídeo de presentación en marcha"
+        ],
+        "repoUrl": "TODO",
+        "demoUrl": "TODO: https://cuadra.app",
+        "isTodo": true
+      },
+      {
+        "id": "cin7-azure-pipeline",
+        "title": "Pipeline de Cin7 a Azure SQL",
+        "subtitle": "Caso real de Bullboat (anonimizado)",
+        "description": "Un sistema de ingesta en Azure Data Factory que trae productos, clientes, proveedores y ventas desde la API de Cin7 hasta Azure SQL para alimentar Power BI.",
+        "badge": "Ingeniería de datos",
+        "tech": [
+          "Azure Data Factory",
+          "Azure SQL",
+          "T-SQL",
+          "Power BI",
+          "API REST"
+        ],
+        "metrics": "Un pipeline para todas las entidades",
+        "caseStudy": "Antes cada informe dependía de exportaciones manuales. Ahora un orquestador lee una tabla de configuración y carga solo lo que ha cambiado. Las ventas, que traen líneas, envíos y facturas, se guardan en siete tablas relacionadas para que Power BI las use sin duplicar datos.",
+        "highlights": [
+          "Carga incremental con marca de agua",
+          "Capas landing, staging y core con MERGE",
+          "Modelo en estrella listo para Power BI"
+        ],
+        "repoUrl": "TODO",
+        "demoUrl": "TODO",
+        "isTodo": true
+      }
+    ],
+    "ask": "Pregúntale a la IA por este proyecto",
+    "askQ": "Explícame el proyecto “{title}” de Juan.",
+    "copyLink": "Copiar enlace",
+    "linkCopied": "Enlace copiado"
+  },
+  "education": {
+    "badge": "Credenciales",
+    "title": "Formación",
+    "subtitle": "Estudios y certificaciones",
+    "degrees": [
+      {
+        "institution": "ESIC University",
+        "location": "Madrid, España",
+        "degree": "Administración y Dirección de Empresas (ADE)",
+        "period": "2022 – 2026",
+        "details": "Grado en ADE cursado en paralelo con el programa de Data Science.",
+        "skillsCovered": [
+          "Microsoft Office Excel",
+          "Estrategia SEO",
+          "Salesforce"
+        ],
+        "highlights": [
+          "Matrícula de Honor en el Trabajo Fin de Grado: “Ventajas del Data Driven Management en las pymes españolas”",
+          "Delegado de clase (sep 2023 – jun 2025), Hackathon, Business Game y Liga de Bolsa Universitaria"
+        ]
+      },
+      {
+        "institution": "ESIC University",
+        "location": "Madrid, España",
+        "degree": "Título Superior en Data Science",
+        "period": "2022 – 2027",
+        "details": "Programa de Data Science cursado en paralelo con el grado en ADE.",
+        "skillsCovered": [
+          "Diseño de Modelos Predictivos",
+          "Power BI"
+        ],
+        "highlights": [
+          "Matrícula de Honor en “Programación en Python para Data Science”"
+        ]
+      },
+      {
+        "institution": "Estonian Business School",
+        "location": "Tallin, Estonia",
+        "degree": "Erasmus · Negocios internacionales",
+        "period": "Ago 2025 – Ene 2026",
+        "details": "Semestre de intercambio centrado en negocios internacionales.",
+        "skillsCovered": [],
+        "highlights": []
+      },
+      {
+        "institution": "Santander X Explorer",
+        "location": "España",
+        "degree": "Programa de emprendimiento · Prácticas de comportamiento empresarial",
+        "period": "Ene 2024 – Jun 2024",
+        "details": "Programa de Santander X sobre prácticas de comportamiento empresarial y emprendimiento.",
+        "skillsCovered": [],
+        "highlights": []
+      }
+    ],
+    "certifications": [
+      {
+        "name": "Microsoft Certified: Azure AI Fundamentals",
+        "code": "AI-900",
+        "issuer": "Microsoft",
+        "date": "Certificado",
+        "badgeUrl": "https://learn.microsoft.com/en-us/credentials/certifications/azure-ai-fundamentals/",
+        "verifyUrl": "TODO",
+        "description": "Demostración de conocimientos clave en machine learning, conceptos de inteligencia artificial y servicios en Microsoft Azure (Visión por Computador, NLP, IA Conversacional).",
+        "isTodo": true
+      }
+    ],
+    "labels": {
+      "certs": "Certificaciones",
+      "recognitions": "Reconocimientos y actividades",
+      "languages": "Idiomas",
+      "languageList": [
+        "Español (nativo)",
+        "Inglés (B2)"
+      ],
+      "courses": "Cursos y certificaciones"
+    },
+    "courses": [
+      "LangChain, LangGraph y Agentes de IA en Python",
+      "Fundamentals of Predictive Project Management",
+      "Dirección y Toma de Decisiones en Entidades Aseguradoras",
+      "Certificaciones de la plataforma Salesforce",
+      "Estratega SEO",
+      "Diseño de Modelos Predictivos",
+      "Power BI",
+      "Microsoft Office Excel"
+    ]
+  },
+  "contact": {
+    "badge": "Contacto",
+    "title": "Hablemos",
+    "subtitle": "Contacto",
+    "terminalHeader": "Formulario de Contacto Directo",
+    "intro": "Si buscas a alguien que entienda la operación y sepa montar los sistemas y los datos que hay detrás, escríbeme. También me encuentras en LinkedIn.",
+    "emailLabel": "Email",
+    "emailValue": "Bernuynavarrete05@gmail.com",
+    "phoneValue": "TODO: +34 600 000 000",
+    "linkedinLabel": "LinkedIn",
+    "linkedinValue": "https://www.linkedin.com/in/juan-andrés-bernuy-navarete",
+    "githubLabel": "GitHub",
+    "githubValue": "https://github.com/JuanABernuy",
+    "locationValue": "Madrid, España (CET / UTC+1)",
+    "form": {
+      "nameLabel": "Nombre",
+      "namePlaceholder": "Tu nombre",
+      "emailLabel": "Email",
+      "emailPlaceholder": "tu@empresa.com",
+      "subjectLabel": "Asunto",
+      "subjectPlaceholder": "¿De qué quieres hablar?",
+      "messageLabel": "Mensaje",
+      "messagePlaceholder": "Hola Juan, te escribo porque…",
+      "submitButton": "Enviar",
+      "sending": "Enviando…",
+      "successMsg": "Listo, se abre tu correo para enviarlo",
+      "downloadCv": "Descargar CV (PDF)"
+    }
+  },
+  "chat": {
+    "title": "Asistente de Juan",
+    "subtitle": "Responde con mi CV y mi experiencia",
+    "welcome": "¡Hola! Soy el asistente de Juan. Pregúntame por su experiencia, sus proyectos o cómo trabaja y te respondo con lo que hay en su CV.",
+    "inputPlaceholder": "Escribe tu pregunta…",
+    "send": "Enviar",
+    "suggestedTitle": "Puedes empezar por aquí:",
+    "suggestions": [
+      "¿Qué hace Juan en Bullboat?",
+      "¿Cómo montó el pipeline de Cin7 a Azure?",
+      "¿Qué es su servidor MCP?",
+      "¿Qué estudia y dónde?",
+      "¿Está abierto a nuevas oportunidades?"
+    ],
+    "unconfiguredNotice": "La clave de la API de Gemini está pendiente de configurar en .env.local. El asistente funciona en modo local con búsqueda BM25 sobre su base de conocimiento.",
+    "typing": "Pensando…",
+    "rateLimited": "Vas muy rápido. Espera un momento y vuelve a preguntar.",
+    "errorMsg": "Ahora mismo no he podido responder. Prueba otra vez o escribe a Juan directamente.",
+    "clearChat": "Borrar conversación"
+  },
+  "footer": {
+    "tagline": "Business Systems Analyst · Operaciones, sistemas y datos.",
+    "rights": "Todos los derechos reservados.",
+    "madridTime": "Hora de Madrid",
+    "backToTop": "Volver arriba"
+  },
+  "international": {
+    "badge": "Experiencia internacional",
+    "title": "Estudiando y trabajando por Europa",
+    "intro": "De Madrid a Tallin: un semestre Erasmus en Estonian Business School junto a una carrera en operaciones, sistemas y datos en España.",
+    "hint": "Pulsa una ciudad del mapa o una tarjeta para explorarla.",
+    "showAll": "Ver ambas",
+    "distanceLabel": "Madrid ↔ Tallin",
+    "countriesLabel": "Países donde he vivido y estudiado",
+    "monthsLabel": "Meses en el extranjero (Erasmus)",
+    "locations": [
+      {
+        "id": "madrid",
+        "city": "Madrid",
+        "country": "España",
+        "flag": "🇪🇸",
+        "period": "2022 – actualidad",
+        "role": "Base: estudios y carrera profesional",
+        "items": [
+          "ESIC University: Administración y Dirección de Empresas (ADE) y Data Science",
+          "Bullboat: Business Systems Analyst, operaciones con almacenes en Países Bajos y Reino Unido",
+          "Zamora Company: Global Supply Chain Intern",
+          "Multiservicios Byntel: Técnico en Redes de Telecomunicaciones"
+        ]
+      },
+      {
+        "id": "tallinn",
+        "city": "Tallin",
+        "country": "Estonia",
+        "flag": "🇪🇪",
+        "period": "Ago 2025 – Ene 2026",
+        "role": "Semestre de intercambio Erasmus",
+        "items": [
+          "Estonian Business School: Erasmus en Negocios Internacionales",
+          "Semestre de intercambio en un entorno académico internacional"
+        ]
+      }
+    ],
+    "ask": "Pregúntale a la IA",
+    "askQ": "¿Qué hizo Juan en {city}?",
+    "opsToggle": "Ver operaciones en remoto",
+    "opsLabel": "Almacenes partner gestionados desde Madrid",
+    "nl": "Países Bajos",
+    "uk": "Reino Unido"
+  },
+  "story": {
+    "controls": {
+      "play": "Reproducir",
+      "pause": "Pausar",
+      "next": "Siguiente",
+      "prev": "Anterior",
+      "replay": "Ver de nuevo",
+      "narrateOn": "Activar narración",
+      "narrateOff": "Silenciar narración",
+      "skip": "Ver la web completa",
+      "chapter": "Capítulo",
+      "hint": "La historia avanza sola · ← → para moverte · espacio para pausar",
+      "tapHint": "Toca a la derecha para avanzar"
+    },
+    "chapters": [
+      {
+        "id": "intro",
+        "eyebrow": "Madrid · Business Systems Analyst",
+        "title": "Hola, soy Juan Andrés.",
+        "text": "Soy Business Systems Analyst en Bullboat y me dedico a que los datos de la empresa sean fiables, desde el ERP hasta el informe. Te lo cuento en un minuto, sin scroll.",
+        "duration": 11
+      },
+      {
+        "id": "cable",
+        "eyebrow": "2022 – 2024 · Los inicios",
+        "title": "Empecé con las manos en el cable",
+        "text": "Mientras empezaba ADE y Data Science en ESIC, trabajaba de técnico de redes: instalaba fibra (FTTH) y cableado RJ45 en edificios e instalaciones públicas.",
+        "duration": 8
+      },
+      {
+        "id": "zamora",
+        "eyebrow": "2024 – 2025 · Zamora Company",
+        "title": "Del cable al dato",
+        "text": "En Zamora Company, como Global Supply Chain Intern, analizaba pedidos nacionales, internacionales y de e-commerce en SAP, controlaba el stock por línea de producto y preparaba los informes semanales, Intrastat incluido.",
+        "duration": 9
+      },
+      {
+        "id": "europe",
+        "eyebrow": "2025 – 2026 · Erasmus",
+        "title": "De Madrid a Tallin",
+        "text": "Un semestre de negocios internacionales en Estonian Business School, a 2.893 km de casa.",
+        "duration": 7
+      },
+      {
+        "id": "bullboat",
+        "eyebrow": "2025 – hoy · Bullboat",
+        "title": "Que el negocio funcione con datos fiables",
+        "text": "Entré como Logistics & Operations Intern y hoy soy el Business Systems Analyst. Migré los datos de Sage a Cin7, conecté los almacenes de Países Bajos y Reino Unido y ahora estoy llevando la empresa a Microsoft Azure.",
+        "duration": 10
+      },
+      {
+        "id": "ai",
+        "eyebrow": "IA aplicada",
+        "title": "IA conectada al negocio",
+        "text": "Monté un servidor MCP en Python para que Claude pueda consultar Cin7 (pedidos, stock, compras y clientes) con acceso de solo lectura. Y el asistente de esta web responde sobre mí con RAG y Gemini.",
+        "duration": 10
+      },
+      {
+        "id": "profile",
+        "eyebrow": "Lo que me define",
+        "title": "Negocio y datos, a la vez",
+        "text": "Dos Matrículas de Honor en ESIC, la certificación Azure AI Fundamentals, español nativo e inglés B2. Lo mío es entender qué necesita la operación y convertirlo en un sistema que funcione.",
+        "duration": 8
+      },
+      {
+        "id": "contact",
+        "eyebrow": "Fin de la historia",
+        "title": "¿Hablamos?",
+        "text": "Pregúntale a mi asistente lo que quieras, descárgate el CV o escríbeme por LinkedIn.",
+        "duration": 0
+      }
+    ],
+    "visuals": {
+      "cableTags": [
+        "FTTH",
+        "RJ45",
+        "Ezentis",
+        "Atelco",
+        "Vimantik"
+      ],
+      "esic": "ESIC University",
+      "esicSub": "ADE + Data Science",
+      "tech": "Técnico de redes",
+      "techSub": "Multiservicios Byntel",
+      "zamoraIn": [
+        "Pedidos nacionales",
+        "Internacionales",
+        "E-commerce"
+      ],
+      "zamoraHub": "SAP",
+      "zamoraOut": [
+        "Stock por línea",
+        "Informes semanales",
+        "Intrastat"
+      ],
+      "km": "2.893 km",
+      "months": "6 meses",
+      "bullboatStart": "Logistics & Operations Intern",
+      "bullboatNow": "Business Systems Analyst",
+      "pipeline": [
+        "Sage",
+        "Cin7 Core",
+        "Azure Data Factory",
+        "Azure SQL",
+        "Power BI"
+      ],
+      "warehouses": "Almacenes NL · UK",
+      "aiNodes": [
+        "Claude",
+        "Servidor MCP (Python · FastMCP)",
+        "API de Cin7 Core"
+      ],
+      "readOnly": "Solo lectura",
+      "aiData": [
+        "Pedidos",
+        "Stock",
+        "Compras",
+        "Clientes"
+      ],
+      "badges": [
+        "2 × Matrícula de Honor",
+        "Azure AI Fundamentals",
+        "ADE + Data Science",
+        "Español nativo · Inglés B2",
+        "Santander X Explorer"
+      ],
+      "ask": "Pregúntale a mi asistente",
+      "cv": "Descargar CV",
+      "linkedin": "LinkedIn"
+    }
+  }
+}

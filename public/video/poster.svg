@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 450" fill="none">
+  <defs>
+    <radialGradient id="bg" cx="50%" cy="50%" r="70%">
+      <stop offset="0%" stop-color="#0f172a"/>
+      <stop offset="100%" stop-color="#030712"/>
+    </radialGradient>
+    <linearGradient id="glow" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#22d3ee" stop-opacity="0.8"/>
+      <stop offset="100%" stop-color="#8b5cf6" stop-opacity="0.8"/>
+    </linearGradient>
+  </defs>
+  <rect width="800" height="450" fill="url(#bg)"/>
+  <circle cx="400" cy="225" r="160" stroke="#22d3ee" stroke-opacity="0.1" stroke-width="2"/>
+  <circle cx="400" cy="225" r="90" stroke="#8b5cf6" stroke-opacity="0.2" stroke-width="1.5" stroke-dasharray="4 6"/>
+  <circle cx="400" cy="225" r="48" fill="#0f172a" stroke="url(#glow)" stroke-width="2"/>
+  <polygon points="392,205 418,225 392,245" fill="#22d3ee"/>
+  <text x="400" y="310" font-family="'Space Grotesk', sans-serif" font-weight="600" font-size="20" fill="#f8fafc" text-anchor="middle" letter-spacing="1">JUAN ANDRÉS BERNUY</text>
+  <text x="400" y="338" font-family="'JetBrains Mono', monospace" font-size="12" fill="#22d3ee" text-anchor="middle" letter-spacing="2">SYSTEMS BRIEFING // 60s EXECUTIVE INTRO</text>
+</svg>
