@@ -92,7 +92,7 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({ isOpen, onClose,
       icon: <Download className="w-4 h-4 text-slate-600" />,
       action: () => {
         const link = document.createElement('a');
-        link.href = '/cv.pdf';
+        link.href = `${import.meta.env.BASE_URL}cv.pdf`;
         link.download = 'CV_Juan_Andres_Bernuy.pdf';
         link.click();
         showToast('CV download initiated', 'success');

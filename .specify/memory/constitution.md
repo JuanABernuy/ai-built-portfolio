@@ -12,6 +12,8 @@ Todo dato que aparece en la web o en la base de conocimiento del asistente debe 
 ## II. Los secretos nunca salen del servidor
 La clave de Gemini vive solo en `.env.local` (local) o en las variables de entorno de Vercel. Nunca en el código del navegador, en `.env.example` ni en el historial de Git. Los agentes no abren, imprimen ni modifican `.env.local`.
 
+**Excepción aprobada por el autor (spec 007):** la versión publicada en GitHub Pages llama a Gemini desde el navegador con una clave **distinta**, de capa gratuita y **sin facturación**, restringida al dominio de la web y a la Generative Language API. Entra en el build como secreto de GitHub Actions (`GEMINI_API_KEY` → `VITE_GEMINI_API_KEY`), así que no está en el repositorio, pero sí es visible en el JavaScript publicado. Nunca se usa para esto una clave con facturación.
+
 ## III. Contenido separado del código
 Todo el texto visible está en `src/content/es.json` y `src/content/en.json`, con la misma estructura en ambos idiomas. Los componentes no contienen frases fijas salvo etiquetas mínimas de interfaz con su traducción.
 

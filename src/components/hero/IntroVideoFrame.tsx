@@ -112,8 +112,8 @@ export const IntroVideoFrame: React.FC<IntroVideoFrameProps> = ({ active = true,
         <>
           <video
             ref={videoRef}
-            src="/video/intro.mp4"
-            poster="/video/poster.jpg"
+            src={`${import.meta.env.BASE_URL}video/intro.mp4`}
+            poster={`${import.meta.env.BASE_URL}video/poster.jpg`}
             preload="auto"
             autoPlay
             muted={muted}

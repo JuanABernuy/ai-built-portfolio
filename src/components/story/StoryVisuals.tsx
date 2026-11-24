@@ -262,7 +262,7 @@ export const ContactVisual: React.FC<{ v: V; onAsk: () => void; linkedin: string
     </motion.button>
     <motion.a
       {...pop(1, 0.1)}
-      href="/cv.pdf"
+      href={`${import.meta.env.BASE_URL}cv.pdf`}
       download="CV_Juan_Andres_Bernuy.pdf"
       className="w-full flex items-center justify-center gap-2 px-5 py-3.5 rounded-xl bg-white border border-slate-300 hover:bg-slate-50 text-slate-800 text-sm font-semibold"
     >

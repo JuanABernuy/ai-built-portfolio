@@ -82,7 +82,14 @@ La IA acelera muchísimo la construcción, pero sin especificaciones claras, fue
 
 ## Despliegue
 
-Pensado para Vercel: importa el repositorio, añade `GEMINI_API_KEY` y `GEMINI_MODEL` en las variables de entorno del proyecto y despliega.
+**GitHub Pages (opción actual).** El workflow `.github/workflows/deploy-pages.yml` publica la web en cada push a `main`.
+1. Settings → Pages → Source: **GitHub Actions**.
+2. Settings → Secrets and variables → Actions → New repository secret: `GEMINI_API_KEY` con una clave **sin facturación** (ver spec 007).
+3. En Google Cloud, restringe esa clave al dominio `https://juanabernuy.github.io/*` y a la Generative Language API.
+
+En Pages la clave es visible en el navegador; es una decisión documentada en `specs/007-ia-en-github-pages`. Sin el secreto, el chat responde en modo sin IA buscando en la base de conocimiento.
+
+**Vercel (alternativa con la clave oculta).** Importa el repositorio, añade `GEMINI_API_KEY` y `GEMINI_MODEL` en las variables de entorno y despliega; el asistente usa la función `api/chat.ts`.
 
 ## Autor
 

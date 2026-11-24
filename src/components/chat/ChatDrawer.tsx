@@ -128,11 +128,48 @@ export const ChatDrawer: React.FC<ChatDrawerProps> = ({ isOpen, onClose, pending
       stickToBottom.current = true;
 
       try {
-        const response = await fetch('/api/chat', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ message: query, lang }),
-        });
+        let response: Response | null = null;
+        try {
+          response = await fetch(`${import.meta.env.BASE_URL}api/chat`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ message: query, lang }),
+          });
+        } catch {
+          response = null;
+        }
+
+        // No server behind the site (e.g. GitHub Pages): answer from the knowledge base in the browser
+        const isStream = (response?.headers.get('content-type') || '').includes('text/event-stream');
+        if (!response || (!isStream && response.status !== 429)) {
+          // GitHub Pages build with a public, free-tier key: call Gemini from the browser
+          if (import.meta.env.VITE_GEMINI_API_KEY) {
+            const { streamFromBrowser, browserErrorMessage } = await import('../../lib/browserGemini');
+            let started = false;
+            try {
+              await streamFromBrowser(query, chunk => {
+                if (!started) {
+                  started = true;
+                  setIsWaiting(false);
+                  setIsStreaming(true);
+                  setMessages([...base, { id: botMsgId, sender: 'bot', text: chunk, timestamp: nowLabel(), query }]);
+                } else {
+                  setMessages(prev => prev.map(m => (m.id === botMsgId ? { ...m, text: m.text + chunk } : m)));
+                }
+              });
+              if (started) return;
+            } catch (e) {
+              if (started) throw new Error(browserErrorMessage(e, lang));
+              // Limit reached: say so instead of silently switching modes
+              if ((e as any)?.status === 429) throw new Error(browserErrorMessage(e, lang));
+            }
+          }
+          const { localAnswer } = await import('../../lib/localAnswer');
+          const text = await localAnswer(query, lang);
+          setIsWaiting(false);
+          setMessages([...base, { id: botMsgId, sender: 'bot', text, timestamp: nowLabel(), query }]);
+          return;
+        }
 
         if (!response.ok) {
           throw new Error(response.status === 429 ? t.chat.rateLimited : t.chat.errorMsg);

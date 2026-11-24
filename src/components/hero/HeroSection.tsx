@@ -111,7 +111,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onOpenChat }) => {
 
               {/* Text Link with Animated Underline */}
               <a
-                href="/cv.pdf"
+                href={`${import.meta.env.BASE_URL}cv.pdf`}
                 download="CV_Juan_Andres_Bernuy.pdf"
                 className="group relative inline-flex items-center gap-1.5 text-sm font-medium text-slate-700 hover:text-blue-700 transition-colors px-2 py-3"
               >
