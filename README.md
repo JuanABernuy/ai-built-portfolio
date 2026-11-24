@@ -3,7 +3,7 @@
 Web personal de CV de **Juan Andrés Bernuy Navarrete**, Business Systems Analyst en Madrid.
 La primera pantalla cuenta mi trayectoria como una historia que avanza sola (no hace falta hacer scroll) y el resto de la página permite explorar el detalle: experiencia, proyectos, formación y un asistente con IA que responde preguntas sobre mi perfil.
 
-> Proyecto desarrollado como trabajo de clase sobre **programación con IA**. La documentación del proceso (metodología Spec-Driven Development y uso de agentes de IA) está en la carpeta [`docs/`](docs/).
+> 📚 **Trabajo de clase: programar con IA.** El proyecto se ha construido con agentes de IA siguiendo la metodología **Spec-Driven Development (SDD)**. Todo el proceso está documentado en el repositorio (ver [más abajo](#trabajo-de-clase-programar-con-ia)).
 
 ## Qué incluye
 
@@ -46,6 +46,39 @@ src/content/           Textos en español e inglés
 src/server/            Lógica RAG compartida (recuperación, caché, Gemini)
 public/                CV en PDF, vídeo y recursos estáticos
 ```
+
+## Trabajo de clase: programar con IA
+
+### Objetivo
+Construir una aplicación web real usando agentes de IA como herramienta principal de desarrollo, pero con un proceso que garantice calidad, veracidad y seguridad. La idea no es que la IA lo haga todo, sino aprender a **dirigirla, verificarla y corregirla**.
+
+### Metodología: Spec-Driven Development
+La especificación es la fuente de verdad, no la conversación con la IA. Se sigue la estructura de [GitHub Spec Kit](https://github.github.com/spec-kit/):
+
+| Artefacto | Para qué sirve |
+|---|---|
+| [`.specify/memory/constitution.md`](.specify/memory/constitution.md) | Principios del proyecto (no inventar datos, secretos solo en el servidor, presupuestos de rendimiento…) |
+| [`specs/`](specs/) | Una carpeta por funcionalidad con `spec.md` (qué y por qué), `plan.md` (cómo) y `tasks.md` (pasos y estado) |
+| [`AGENTS.md`](AGENTS.md) | Contexto y reglas para cualquier agente de IA que trabaje en el repo |
+| [`docs/trabajo-con-ia.md`](docs/trabajo-con-ia.md) | Herramientas, cronología, **errores de la IA y cómo se detectaron**, buenas prácticas y lecciones |
+| [`docs/prompts.md`](docs/prompts.md) | Prompts reales usados con Antigravity y Google Vids |
+
+### Herramientas de IA usadas
+- **Claude**: planificación, prompts, desarrollo, depuración, optimización, verificación y documentación.
+- **Google Antigravity**: generación de la primera versión y parte del rediseño.
+- **Google Vids**: vídeo de presentación con avatar.
+- **Google Gemini API**: modelo del asistente RAG de la web.
+
+### Resultados medidos (Lighthouse)
+| | Versión generada por IA | Versión final |
+|---|---|---|
+| Rendimiento móvil | 75 | 95 |
+| Rendimiento escritorio | 97 | 100 |
+| Accesibilidad | 95 | 96 |
+| Datos inventados por la IA en la web | 10+ | 0 |
+
+### Conclusión
+La IA acelera muchísimo la construcción, pero sin especificaciones claras, fuentes de verdad y verificación sistemática introduce errores difíciles de ver: cifras inventadas, enlaces falsos, una clave en un archivo público o dependencias pesadas. El valor del desarrollador está en **definir bien qué se quiere y comprobar que se ha conseguido**.
 
 ## Despliegue
 
